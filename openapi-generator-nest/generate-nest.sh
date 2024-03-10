@@ -1,0 +1,1 @@
+openapi-generator-cli generate -i posts-api.yml -g typescript-nestjs -o ./generated
