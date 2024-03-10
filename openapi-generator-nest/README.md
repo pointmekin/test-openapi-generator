@@ -71,3 +71,30 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+---
+
+# Notes on openapi-generator
+
+Server code generation
+- Easy and straight forward
+- Command
+  ```bash
+  openapi-generator-cli generate -i posts-api.yml -g typescript-nestjs -o ./generated
+  ```
+  - Use the openapi-generator-cli to generate server code using posts-api.yaml 
+  - The generated code is saved to the folder called "generated"
+  
+
+- The code itself can be generated on its own. The initial NestJS project is not necessary. However, it won't run.
+- So it's recommended to generate the code inside an existing NestJS project.
+- Up to this point, the code generated can't be run yet as there will be some dependencies required beyond the barebone NestJS project, such as:
+  - `@nestjs/axios`
+  - `axios`
+- Once installed, the next thing to do is to update the service's module 
+  - add `HttpModule` to the `app.module.ts` imports array
+  - add `DefaultService` to the `app.module.ts` providers array
+- Now the application can be run
+- ⚠️ The code ran into an error
+  - The generated code references the variable `postId`. However, despite taking the parameter  `postId`, it references that variable with `post_id`, causing the program to fail due to type errors...
+- After fixing this issue, the generated can be used without problem
